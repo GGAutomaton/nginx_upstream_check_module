@@ -14,7 +14,7 @@ Index: ngx_http_sticky_module.c
  /* define a peer */
  typedef struct {
  	ngx_http_upstream_rr_peer_t *rr_peer;
-@@ -287,6 +292,16 @@
+@@ -299,6 +304,16 @@
  					return NGX_BUSY;
  				}
  
@@ -31,7 +31,7 @@ Index: ngx_http_sticky_module.c
  				/* if it's been ignored for long enought (fail_timeout), reset timeout */
  				/* do this check before testing peer->fails ! :) */
  				if (now - peer->accessed > peer->fail_timeout) {
-@@ -303,6 +318,14 @@
+@@ -315,6 +330,14 @@
  			/* ensure the peer is not marked as down */
  			if (!peer->down) {
  
@@ -46,7 +46,7 @@ Index: ngx_http_sticky_module.c
  				/* if it's not failedi, use it */
  				if (peer->max_fails == 0 || peer->fails < peer->max_fails) {
  					selected_peer = (ngx_int_t)n;
-@@ -317,6 +340,9 @@
+@@ -329,6 +352,9 @@
  					/* mark the peer as tried */
  					iphp->rrp.tried[n] |= m;
  				}
